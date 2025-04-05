@@ -90,6 +90,19 @@ async def updates(ctx):
         logger.exception(f"Error during manual task check: {e}")
 
 
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        await ctx.send(f"❌ Unknown command. Use `!tasks` to see all available tasks or `!updates` to check for new tasks.")
+        logger.info(f"User {ctx.author} tried to use an unknown command: {ctx.message.content}")
+    elif isinstance(error, commands.MissingRequiredArgument):
+        await ctx.send(f"❌ Missing required argument: {error.param}")
+        logger.info(f"User {ctx.author} missed required argument: {error.param}")
+    else:
+        await ctx.send(f"❌ An error occurred: {str(error)}")
+        logger.exception(f"Command error: {error}")
+
+
 async def task_check_loop():
     await bot.wait_until_ready()
 

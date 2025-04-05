@@ -11,6 +11,10 @@ This project idea came to me after I wanted to somehow get notified for when the
 - 💾 Keeps track of previously seen tasks to avoid duplicate notifications
 - 🤖 Command-based interaction to view all current tasks
 
+## Current Status
+
+⚠️ **Note:** This bot currently only works locally when running the Python file. I'm planning to deploy it to a cloud service to provide 24/7 availability and share it with our course Discord server of approximately 50 participants to help everyone stay updated on new assignments.
+
 ## Installation
 
 1. Clone this repository:
