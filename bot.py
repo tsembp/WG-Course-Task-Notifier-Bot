@@ -29,6 +29,10 @@ intents.message_content = True
 
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+def sort_tasks_by_id(tasks):
+    """Sort tasks by ID, converting to integer if possible"""
+    return sorted(tasks, key=lambda task: int(task['id']) if task['id'].isdigit() else task['id'])
+
 @bot.event
 async def on_ready():
     logger.info(f"✅ Bot logged in as {bot.user}")
@@ -38,8 +42,9 @@ async def on_ready():
 async def tasks(ctx):
     logger.info(f"Tasks command triggered by {ctx.author}")
     tasks = login_and_fetch_tasks()
+    sorted_tasks = sort_tasks_by_id(tasks)
     message = "**Latest Tasks:**\n"
-    for task in tasks:
+    for task in sorted_tasks:
         message += f"• {task['title']} (ID: {task['id']})\n"
     await ctx.send(message)
 
@@ -65,7 +70,8 @@ async def task_check_loop():
                     logger.error(f"Could not find channel with ID: {CHANNEL_ID}")
                     continue
                     
-                for task in new_tasks:
+                sorted_new_tasks = sort_tasks_by_id(new_tasks)
+                for task in sorted_new_tasks:
                     await channel.send(f"🆕 New Task: **{task['title']}** (ID: `{task['id']}`)")
                 save_seen_tasks(current_tasks)
             else:

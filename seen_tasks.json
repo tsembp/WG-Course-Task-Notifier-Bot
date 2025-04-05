@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "id": "1",
+    "title": "Hello World on Python"
+  },
+  {
+    "id": "21",
+    "title": "Extra: Brute password"
+  },
+  {
+    "id": "22",
+    "title": "Extra: gopher server"
+  },
+  {
+    "id": "25",
+    "title": "Extra: Undefined Behavior"
+  },
+  {
+    "id": "26",
+    "title": "Extra: directory browsing"
+  },
+  {
+    "id": "17",
+    "title": "If I were a robot (r0b07)"
+  },
+  {
+    "id": "18",
+    "title": "If I were a robot pt.2 (browser - @g3n7)"
+  },
+  {
+    "id": "19",
+    "title": "If I were a robot pt.3 (@u7h)"
+  },
+  {
+    "id": "20",
+    "title": "If I were a robot pt.4 (rce)"
+  },
+  {
+    "id": "3",
+    "title": "File task"
+  },
+  {
+    "id": "4",
+    "title": "VI(M) task"
+  },
+  {
+    "id": "6",
+    "title": "Guess Language"
+  },
+  {
+    "id": "7",
+    "title": "Simple Dictionary"
+  },
+  {
+    "id": "8",
+    "title": "The largest palindrome"
+  },
+  {
+    "id": "23",
+    "title": "Balanced Brackets"
+  },
+  {
+    "id": "24",
+    "title": "Lowest Common Ancestor"
+  }
+]
