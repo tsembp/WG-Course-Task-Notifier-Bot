@@ -69,6 +69,8 @@ The bot will automatically check for new tasks every 10 minutes and post notific
 ## Commands
 
 - `!tasks` - Displays all available tasks from the course platform
+- `!updates` - Checks for new tasks
+
 
 ## Dependencies
 

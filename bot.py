@@ -38,15 +38,57 @@ async def on_ready():
     logger.info(f"✅ Bot logged in as {bot.user}")
     bot.loop.create_task(task_check_loop())
 
+
 @bot.command()
 async def tasks(ctx):
     logger.info(f"Tasks command triggered by {ctx.author}")
-    tasks = login_and_fetch_tasks()
-    sorted_tasks = sort_tasks_by_id(tasks)
-    message = "**Latest Tasks:**\n"
-    for task in sorted_tasks:
-        message += f"• {task['title']} (ID: {task['id']})\n"
-    await ctx.send(message)
+    status_msg = await ctx.send("🔍 Fetching tasks...")
+    
+    try:
+        tasks = login_and_fetch_tasks()
+        sorted_tasks = sort_tasks_by_id(tasks)
+        
+        message = "**Latest Tasks:**\n"
+        for task in sorted_tasks:
+            message += f"• {task['title']} (ID: {task['id']})\n"
+        
+        await status_msg.edit(content=message)
+        logger.info(f"Displayed {len(tasks)} tasks for {ctx.author}")
+    except Exception as e:
+        await status_msg.edit(content=f"❌ Error fetching tasks: {str(e)}")
+        logger.exception(f"Error during task fetch: {e}")
+
+
+@bot.command()
+async def updates(ctx):
+    logger.info(f"Updates command triggered by {ctx.author}")
+    
+    # Initial message
+    status_msg = await ctx.send("🔍 Checking for new tasks...")
+    
+    try:
+        current_tasks = login_and_fetch_tasks()
+        seen_tasks = load_seen_tasks()
+        new_tasks = get_new_tasks(current_tasks, seen_tasks)
+
+        if new_tasks:
+            sorted_new_tasks = sort_tasks_by_id(new_tasks)
+            await status_msg.edit(content=f"📢 Found {len(new_tasks)} new tasks!")
+            
+            for task in sorted_new_tasks:
+                await ctx.send(f"🆕 New Task: **{task['title']}** (ID: `{task['id']}`)")
+            
+            # Update seen tasks after notifying
+            save_seen_tasks(current_tasks)
+            logger.info(f"Updated seen_tasks.json with {len(new_tasks)} new tasks")
+        else:
+            await status_msg.edit(content="✅ No new tasks available.")
+            logger.info("No new tasks found during manual check")
+            
+    except Exception as e:
+        await status_msg.edit(content=f"❌ Error checking for updates: {str(e)}")
+        logger.exception(f"Error during manual task check: {e}")
+
 
 async def task_check_loop():
     await bot.wait_until_ready()
