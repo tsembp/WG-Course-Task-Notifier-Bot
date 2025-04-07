@@ -46,11 +46,20 @@ async def tasks(ctx):
     
     try:
         tasks = login_and_fetch_tasks()
-        sorted_tasks = sort_tasks_by_id(tasks)
+        # Group tasks by category
+        tasks_by_category = {}
+        for task in tasks:
+            category = task.get('category', 'Uncategorized')
+            if category not in tasks_by_category:
+                tasks_by_category[category] = []
+            tasks_by_category[category].append(task)
         
         message = "**Latest Tasks:**\n"
-        for task in sorted_tasks:
-            message += f"• {task['title']} (ID: {task['id']})\n"
+        for category, category_tasks in tasks_by_category.items():
+            message += f"\n**{category}**\n"
+            sorted_cat_tasks = sort_tasks_by_id(category_tasks)
+            for task in sorted_cat_tasks:
+                message += f"• {task['title']} (ID: {task['id']})\n"
         
         await status_msg.edit(content=message)
         logger.info(f"Displayed {len(tasks)} tasks for {ctx.author}")
@@ -126,12 +135,20 @@ async def task_check_loop():
                     logger.error(f"Could not find channel with ID: {CHANNEL_ID}")
                     continue
                     
-                sorted_new_tasks = sort_tasks_by_id(new_tasks)
+                # Group new tasks by category
+                tasks_by_category = {}
+                for task in new_tasks:
+                    category = task.get('category', 'Uncategorized')
+                    if category not in tasks_by_category:
+                        tasks_by_category[category] = []
+                    tasks_by_category[category].append(task)
                 
-                # Send initial announcement
-                message = f"@everyone\n📢 {len(new_tasks)} new task(s) have been uploaded!\n\nNew tasks:"
-                for task in sorted_new_tasks:
-                    message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
+                message = f"@everyone\n📢 {len(new_tasks)} new task(s) have been uploaded!\n"
+                for category, category_tasks in tasks_by_category.items():
+                    message += f"\n**{category}**"
+                    sorted_cat_tasks = sort_tasks_by_id(category_tasks)
+                    for task in sorted_cat_tasks:
+                        message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
                 
                 await channel.send(message)
                 save_seen_tasks(current_tasks)

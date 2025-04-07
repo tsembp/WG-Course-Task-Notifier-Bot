@@ -43,21 +43,27 @@ def login_and_fetch_tasks():
     # Wait for the challenge buttons to appear
     WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, "challenge-button")))
 
-    buttons = driver.find_elements(By.CLASS_NAME, "challenge-button")
+    sections = driver.find_elements(By.CLASS_NAME, "tasks-section")
     tasks = []
 
-    for btn in buttons:
-        title_el = btn.find_element(By.TAG_NAME, "p")
-        task_id = btn.get_attribute("value")
-        title = title_el.text
-        # Convert task titles containing "???" to start with "Extra: "
-        if "???" in title and not title.startswith("Extra: "):
-            title = f"Extra: {title}"
+    for section in sections:
+        category = section.find_element(By.CLASS_NAME, "tasks-section-title").text.strip()
+        buttons = section.find_elements(By.CLASS_NAME, "challenge-button")
+        
+        for btn in buttons:
+            title_el = btn.find_element(By.TAG_NAME, "p")
+            task_id = btn.get_attribute("value")
+            title = title_el.text
             
-        tasks.append({
-            "id": task_id,
-            "title": title
-        })
+            # Convert task titles containing "???" to start with "Extra: "
+            if "???" in title and not title.startswith("Extra: "):
+                title = f"Extra: {title}"
+            
+            tasks.append({
+                "id": task_id,
+                "title": title,
+                "category": category
+            })
 
     driver.quit()
     return tasks
