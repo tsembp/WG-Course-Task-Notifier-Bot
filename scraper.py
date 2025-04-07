@@ -47,7 +47,7 @@ def login_and_fetch_tasks():
     tasks = []
 
     for section in sections:
-        category = section.find_element(By.CLASS_NAME, "tasks-section-title").text.strip()
+        category = section.find_element(By.TAG_NAME, "h3").text.strip()
         buttons = section.find_elements(By.CLASS_NAME, "challenge-button")
         
         for btn in buttons:
