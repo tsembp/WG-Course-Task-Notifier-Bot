@@ -59,7 +59,7 @@ async def tasks(ctx):
             message += f"\n**{category}**\n"
             sorted_cat_tasks = sort_tasks_by_id(category_tasks)
             for task in sorted_cat_tasks:
-                message += f"• {task['title']} (ID: {task['id']})\n"
+                message += f"• {task['title']}\n"
         
         await status_msg.edit(content=message)
         logger.info(f"Displayed {len(tasks)} tasks for {ctx.author}")
@@ -82,9 +82,9 @@ async def updates(ctx):
 
         if new_tasks:
             sorted_new_tasks = sort_tasks_by_id(new_tasks)
-            message = f"@everyone\n📢 {len(new_tasks)} new task(s) have been uploaded!\n\nNew tasks:"
+            message = f"📢 {len(new_tasks)} new task(s) have been uploaded!\n\nNew tasks:"
             for task in sorted_new_tasks:
-                message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
+                message += f"\n• **{task['title']}**"
             
             await status_msg.edit(content=message)
             
@@ -148,7 +148,8 @@ async def task_check_loop():
                     message += f"\n**{category}**"
                     sorted_cat_tasks = sort_tasks_by_id(category_tasks)
                     for task in sorted_cat_tasks:
-                        message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
+                        message += f"\n• {task['title']}"
+                    message += f"\n"
                 
                 await channel.send(message)
                 save_seen_tasks(current_tasks)
@@ -157,7 +158,7 @@ async def task_check_loop():
         except Exception as e:
             logger.exception(f"❌ Error during task check: {e}")
 
-        await asyncio.sleep(600)  # wait 10 minutes
+        await asyncio.sleep(30)  # wait 10 minutes
 
 if __name__ == "__main__":
     logger.info("Bot is starting...")
