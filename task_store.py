@@ -24,15 +24,8 @@ def save_seen_tasks(tasks):
             json.dump(tasks, f, indent=2)
 
 def get_new_tasks(current_tasks, seen_tasks):
-    # Create sets of task IDs and titles for comparison
-    seen_task_ids = {(t["id"], t["title"]) for t in seen_tasks}
-    current_task_ids = {(t["id"], t["title"]) for t in current_tasks}
+    # Create set of seen task IDs
+    seen_ids = {t["id"] for t in seen_tasks}
     
-    # Find truly new tasks
-    new_task_ids = current_task_ids - seen_task_ids
-    
-    # Return the full task objects for new tasks
-    return [
-        task for task in current_tasks 
-        if (task["id"], task["title"]) in new_task_ids
-    ]
+    # Return tasks that haven't been seen before
+    return [task for task in current_tasks if task["id"] not in seen_ids]
