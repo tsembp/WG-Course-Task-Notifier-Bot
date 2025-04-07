@@ -73,7 +73,7 @@ async def updates(ctx):
 
         if new_tasks:
             sorted_new_tasks = sort_tasks_by_id(new_tasks)
-            message = f"📢 New task(s) uploaded @everyone - {len(new_tasks)} out now for you to solve\n\nNew task(s):"
+            message = f"@everyone\n📢 {len(new_tasks)} new task(s) have been uploaded!\n\nNew tasks:"
             for task in sorted_new_tasks:
                 message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
             
@@ -129,7 +129,7 @@ async def task_check_loop():
                 sorted_new_tasks = sort_tasks_by_id(new_tasks)
                 
                 # Send initial announcement
-                message = f"📢 New task(s) uploaded @everyone - {len(new_tasks)} out now for you to solve\n\nNew task(s):"
+                message = f"@everyone\n📢 {len(new_tasks)} new task(s) have been uploaded!\n\nNew tasks:"
                 for task in sorted_new_tasks:
                     message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
                 
