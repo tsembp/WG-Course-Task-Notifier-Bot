@@ -1,3 +1,4 @@
+
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -40,30 +41,35 @@ def login_and_fetch_tasks():
 
     driver.get(TASKS_URL)
 
-    # Wait for the challenge buttons to appear
-    WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CLASS_NAME, "challenge-button")))
+    # Wait for the challenge board to load
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "category-header")))
 
-    sections = driver.find_elements(By.CLASS_NAME, "tasks-section")
     tasks = []
-
-    for section in sections:
-        category = section.find_element(By.TAG_NAME, "h3").text.strip()
-        buttons = section.find_elements(By.CLASS_NAME, "challenge-button")
-        
-        for btn in buttons:
-            title_el = btn.find_element(By.TAG_NAME, "p")
-            task_id = btn.get_attribute("value")
-            title = title_el.text
+    
+    # Find all category sections
+    categories = driver.find_elements(By.CLASS_NAME, "pt-5")
+    
+    for category_section in categories:
+        try:
+            # Get category name from the header
+            category_header = category_section.find_element(By.CLASS_NAME, "category-header")
+            category_name = category_header.find_element(By.CLASS_NAME, "category").text.strip()
             
-            # Convert task titles containing "???" to start with "Extra: "
-            if "???" in title and not title.startswith("Extra: "):
-                title = f"Extra: {title}"
+            # Get all challenge buttons in this category
+            challenge_buttons = category_section.find_elements(By.CLASS_NAME, "challenge-button")
             
-            tasks.append({
-                "id": task_id,
-                "title": title,
-                "category": category
-            })
+            for btn in challenge_buttons:
+                title_el = btn.find_element(By.TAG_NAME, "p")
+                task_id = btn.get_attribute("value")
+                title = title_el.text.strip()
+                
+                tasks.append({
+                    "id": task_id,
+                    "title": title,
+                    "category": category_name
+                })
+        except Exception as e:
+            continue  # Skip if category header not found (might be a spacing element)
 
     driver.quit()
     return tasks
