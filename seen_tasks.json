@@ -1,66 +1,82 @@
 [
   {
     "id": "1",
-    "title": "Hello World on Python"
+    "title": "Hello World on Python",
+    "category": "Intro"
   },
   {
     "id": "21",
-    "title": "Extra: Brute password"
+    "title": "Extra: Brute password",
+    "category": "Extra"
   },
   {
     "id": "22",
-    "title": "Extra: gopher server"
+    "title": "Extra: gopher server",
+    "category": "Extra"
   },
   {
     "id": "25",
-    "title": "Extra: Undefined Behavior"
+    "title": "Extra: Undefined Behavior",
+    "category": "Extra"
   },
   {
     "id": "26",
-    "title": "Extra: directory browsing"
+    "title": "Extra: directory browsing",
+    "category": "Extra"
   },
   {
     "id": "17",
-    "title": "If I were a robot (r0b07)"
+    "title": "If I were a robot (r0b07)",
+    "category": "Network & Security"
   },
   {
     "id": "18",
-    "title": "If I were a robot pt.2 (browser - @g3n7)"
+    "title": "If I were a robot pt.2 (browser - @g3n7)",
+    "category": "Network & Security"
   },
   {
     "id": "19",
-    "title": "If I were a robot pt.3 (@u7h)"
+    "title": "If I were a robot pt.3 (@u7h)",
+    "category": "Network & Security"
   },
   {
     "id": "20",
-    "title": "If I were a robot pt.4 (rce)"
+    "title": "If I were a robot pt.4 (rce)",
+    "category": "Network & Security"
   },
   {
     "id": "3",
-    "title": "File task"
+    "title": "File task",
+    "category": "Operating Systems"
   },
   {
     "id": "4",
-    "title": "VI(M) task"
+    "title": "VI(M) task",
+    "category": "Operating Systems"
   },
   {
     "id": "6",
-    "title": "Guess Language"
+    "title": "Guess Language",
+    "category": "Python"
   },
   {
     "id": "7",
-    "title": "Simple Dictionary"
+    "title": "Simple Dictionary",
+    "category": "Python"
   },
   {
     "id": "8",
-    "title": "The largest palindrome"
+    "title": "The largest palindrome",
+    "category": "Python"
   },
   {
     "id": "23",
-    "title": "Balanced Brackets"
+    "title": "Balanced Brackets",
+    "category": "Data Structures"
   },
   {
     "id": "24",
-    "title": "Lowest Common Ancestor"
+    "title": "Lowest Common Ancestor",
+    "category": "Data Structures"
   }
 ]
