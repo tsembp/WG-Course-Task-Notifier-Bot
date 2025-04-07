@@ -158,7 +158,7 @@ async def task_check_loop():
         except Exception as e:
             logger.exception(f"❌ Error during task check: {e}")
 
-        await asyncio.sleep(30)  # wait 10 minutes
+        await asyncio.sleep(60)  # wait 10 minutes
 
 if __name__ == "__main__":
     logger.info("Bot is starting...")
