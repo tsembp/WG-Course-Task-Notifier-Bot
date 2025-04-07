@@ -21,7 +21,7 @@ def login_and_fetch_tasks():
     options.add_argument("--headless=new")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
-    options.binary_location = "/usr/bin/chromium"
+    options.binary_location = "/nix/store/chrome/bin/chromium"
     options.add_argument("--disable-gpu")
     options.add_argument("--remote-debugging-port=9222")
 
