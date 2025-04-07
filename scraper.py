@@ -50,6 +50,10 @@ def login_and_fetch_tasks():
         title_el = btn.find_element(By.TAG_NAME, "p")
         task_id = btn.get_attribute("value")
         title = title_el.text
+        # Convert task titles containing "???" to start with "Extra: "
+        if "???" in title and not title.startswith("Extra: "):
+            title = f"Extra: {title}"
+            
         tasks.append({
             "id": task_id,
             "title": title
