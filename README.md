@@ -1,15 +1,15 @@
-# 🤖 Wargaming Task Notifier Discord Bot
+# 🤖 Wargaming Course - New Task Notifier Discord Bot
 
-A Discord bot that automatically checks for new tasks in Wargaming's Backend SWE Course platform and notifies a specified Discord channel when new tasks become available for students to attempt.
+A Discord bot that scrapes Wargaming's Backend SWE Course platform for new tasks and immediately notifies users in our Discord server.
 
-This project idea came to me after I wanted to somehow get notified for when the tutors of the course added a new task on the platform so I can go ahead and complete it.
+The idea came to me after constantly having to check for updates manually—I wanted a solution that would help not just me, but also the 50 other course participants stay on top of new assignments effortlessly. Currently, the bot runs locally, and I'm planning to deploy it soon for 24/7 automated monitoring.
 
 ## Features
 
-- 🔄 Automatically checks for new course tasks every 10 minutes
-- 🔔 Posts notifications to your Discord channel when new tasks are found
-- 💾 Keeps track of previously seen tasks to avoid duplicate notifications
-- 🤖 Command-based interaction to view all current tasks
+- 🔄 **Automated Monitoring:** Checks for new course tasks every 10 minutes using Selenium web automation.
+- 🔔 **Real-Time Notifications:** Posts instant alerts in a designated Discord channel when new tasks are detected.
+- 💾 **Task Tracking:** Maintains a record of previously seen tasks to prevent duplicate notifications.
+- 🤖 **Command Interface:** Enables users to retrieve current tasks or check for updates on demand using simple commands.
 
 ## Current Status
 
