@@ -73,10 +73,11 @@ async def updates(ctx):
 
         if new_tasks:
             sorted_new_tasks = sort_tasks_by_id(new_tasks)
-            await status_msg.edit(content=f"📢 Found {len(new_tasks)} new tasks!")
-            
+            message = f"📢 New task(s) uploaded @everyone - {len(new_tasks)} out now for you to solve\n\nNew task(s):"
             for task in sorted_new_tasks:
-                await ctx.send(f"🆕 New Task: **{task['title']}** (ID: `{task['id']}`)")
+                message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
+            
+            await status_msg.edit(content=message)
             
             # Update seen tasks after notifying
             save_seen_tasks(current_tasks)
@@ -126,8 +127,13 @@ async def task_check_loop():
                     continue
                     
                 sorted_new_tasks = sort_tasks_by_id(new_tasks)
+                
+                # Send initial announcement
+                message = f"📢 New task(s) uploaded @everyone - {len(new_tasks)} out now for you to solve\n\nNew task(s):"
                 for task in sorted_new_tasks:
-                    await channel.send(f"🆕 New Task: **{task['title']}** (ID: `{task['id']}`)")
+                    message += f"\n• **{task['title']}** (ID: `{task['id']}`)"
+                
+                await channel.send(message)
                 save_seen_tasks(current_tasks)
             else:
                 logger.info("✅ No new tasks found.")
