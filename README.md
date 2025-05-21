@@ -11,9 +11,17 @@ The idea came to me after constantly having to check for updates manually—I wa
 - 💾 **Task Tracking:** Maintains a record of previously seen tasks to prevent duplicate notifications.
 - 🤖 **Command Interface:** Enables users to retrieve current tasks or check for updates on demand using simple commands.
 
-## Current Status
+## Screenshots of usage
 
-⚠️ **Note:** This bot currently only works locally when running the Python file. I'm planning to deploy it to a cloud service to provide 24/7 availability and share it with our course Discord server of approximately 50 participants to help everyone stay updated on new assignments.
+### Listing All Tasks
+![List of tasks command output](Screenshots/list_tasks.png)
+
+### New Task Notifications
+![New task notification](Screenshots/message_notification.png)
+
+### Manual Update Check
+![Update check command](Screenshots/updates.png)
+
 
 ## Installation
 
